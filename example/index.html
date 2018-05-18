@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div class="content"></div>
+    <script src="../src/cache.js"></script>
+    <script>
+        window.onload = function() {
+            var cache = new Cache('sessionStorage');
+            cache.debug.enable();
+            cache.set('test', {
+                'name': '胡海华',
+                'age': '34'
+            }, {
+                'type': 's',
+                'delay': 5
+            });
+            document.querySelector('.content').innerHTML = cache.get('test').name;
+            setTimeout(function() {
+                cache.update('test', {
+                    'type': 's',
+                    'delay': 5
+                })
+                var haha = cache.get('test');
+                cache.clear()
+            }, 6000);
+            console.log(cache.get('cache'));
+        }
+    </script>
+</body>
+
+</html>
