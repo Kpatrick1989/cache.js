@@ -52,11 +52,11 @@
                         }));
                         output('set', 'success', toString(param[0]) + ':' + toString(param[1]) + '  ' + setExpires(param[2].type, param[2].delay, new Date()))
                     } else {
-                        console.error('%c cache:%cSET error%c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
+                        console.error('%c cache:%cSET error %c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
                     }
                     break;
                 default:
-                    console.error('%c cache:%cSET error%c参数应为%c (键<String>, 值<Any>, [过期时间<Obj>]) %c！', '', 'font-weight:bold', '', 'font-style: italic', '');
+                    console.error('%c cache:%cSET error %c参数应为%c (键<String>, 值<Any>, [过期时间<Obj>]) %c！', '', 'font-weight:bold', '', 'font-style: italic', '');
                     break;
             }
         } catch (error) {
@@ -70,7 +70,7 @@
         try {
             var res = JSON.parse(this.storage.getItem(toString(param[0])));
             if (!res) {
-                output('get', 'error', toString(param[0]) + ' 此Key不存在！');
+                output('get', 'error', toString(param[0]) + ' 此 Key 不存在！');
                 return undefined
             }
             var exp = res.Expires == '' ? '' : new Date(res.Expires);
@@ -93,7 +93,7 @@
         try {
             var res = JSON.parse(this.storage.getItem(toString(param[0])));
             if (!res) {
-                output('remove', 'error', toString(param[0]) + ' 此Key不存在！');
+                output('remove', 'error', toString(param[0]) + ' 此 Key 不存在！');
                 return undefined
             }
             var exp = res.Expires == '' ? '' : new Date(res.Expires);
@@ -120,7 +120,7 @@
         var param = arguments;
         var res = JSON.parse(this.storage.getItem(toString(param[0])));
         if (!res) {
-            output('update', 'error', toString(param[0]) + ' 此Key不存在！');
+            output('update', 'error', toString(param[0]) + ' 此 Key 不存在！');
             return undefined
         }
         try {
@@ -133,7 +133,7 @@
                         }));
                         output('update', 'success', toString(param[0]) + ':' + toString(res.Content) + '  ' + setExpires(param[1].type, param[1].delay, new Date()))
                     } else {
-                        console.error('%c cache:%cUPDATE error%c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
+                        console.error('%c cache:%cUPDATE error %c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
                     }
                     break;
                 case 3:
@@ -144,11 +144,11 @@
                         }));
                         output('update', 'success', toString(param[0]) + ':' + toString(param[1]) + '  ' + setExpires(param[2].type, param[2].delay, new Date()))
                     } else {
-                        console.error('%c cache:%cUPDATE error%c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
+                        console.error('%c cache:%cUPDATE error %c过期时间设置格式必须是%c {"type":时间类型<String>,"delay":延迟时间<Number>} %c！', '', 'font-weight:bold', '', 'font-style: italic', '')
                     }
                     break;
                 default:
-                    console.error('%c cache:%cUPDATE error%c参数应为%c (键<String>, [值<Any>], 过期时间<Obj>) %c！', '', 'font-weight:bold', '', 'font-style: italic', '');
+                    console.error('%c cache:%cUPDATE error %c参数应为%c (键<String>, [值<Any>], 过期时间<Obj>) %c！', '', 'font-weight:bold', '', 'font-style: italic', '');
                     break;
             }
         } catch (error) {
