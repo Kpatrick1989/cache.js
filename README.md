@@ -12,10 +12,10 @@ cache.doSomething([key], [value], [expire])  // 部分 API 无需传入参数
 
 #### # 直接引用
 
-下载最新的 `cache.js` ，直接通过 script 标签在 html 页面引用：
+[下载](https://github.com/Kpatrick1989/cache.js/releases) 最新的 `cache.js` ，直接通过 script 标签在 html 页面引用：
 
 ```javascript
-<script src="cache.min.js"></script>
+<script src="cache.js"></script>
 ```
 
 
@@ -25,7 +25,7 @@ cache.doSomething([key], [value], [expire])  // 部分 API 无需传入参数
 在命令行工具里执行下面这个命令：
 
 ```javascript
-$ npm install cache-js --save-dev
+$ npm install cache-lib --save-dev
 ```
 
 
@@ -57,6 +57,8 @@ var cache = new Cache('localStorage');
 // or
 var cache = new Cache('sessionStorage');
 ```
+
+
 
 #### # set
 

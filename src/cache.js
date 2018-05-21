@@ -77,7 +77,7 @@
             if (res.Expires !== '' && new Date(res.Expires) < new Date()) {
                 this.storage.removeItem(toString(param[0]));
                 output('get', 'success', toString(param[0]) + ' 过期已清除！');
-                return undefined
+                return res.Content
             } else {
                 output('get', 'success', toString(param[0]) + ':' + toString(res.Content) + '  ' + exp);
                 return res.Content
