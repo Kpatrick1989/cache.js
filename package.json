@@ -27,7 +27,7 @@
         "cache"
     ],
     "scripts": {
-        "test": "gulp test"
+        "test": "mocha"
     },
     "bugs": {
         "url": "https://github.com/Kpatrick1989/cache.js/issues"
