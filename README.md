@@ -1,4 +1,10 @@
 # cache.js
+[![Build Status](https://travis-ci.org/Kpatrick1989/cache.js.svg?branch=master)](https://travis-ci.org/Kpatrick1989/cache.js)
+[![npm](https://img.shields.io/npm/dw/cache-lib.svg)](https://www.npmjs.com/package/cache-lib)
+<a href='https://gitter.im/cache-js/Lobby'>
+<img src='https://badges.gitter.im/Join%20Chat.svg' alt='Gitter Chat' />
+</a>
+
 `cache.js` 是一个轻量级的 JS 库，对 `localStorage`、`sessionStorage`进行了扩展，增加了序列化方法和过期时间。可以直接存取JSON对象、设置过期时间。
 
 API 结构如下：
