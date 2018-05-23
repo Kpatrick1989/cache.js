@@ -26,9 +26,6 @@
         "storage",
         "cache"
     ],
-    "scripts": {
-        "test": "mocha"
-    },
     "bugs": {
         "url": "https://github.com/Kpatrick1989/cache.js/issues"
     },
