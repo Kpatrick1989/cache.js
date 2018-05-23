@@ -1,5 +1,3 @@
 before_install:
 - npm install -g gulp
 language: node__js
-node__js:
-- "0.10"
