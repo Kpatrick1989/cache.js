@@ -13,12 +13,14 @@ function clearStorage() {
 
 describe('Cache', function () {
     'use strict';
-    after(function () {
+    beforeEach(function () {
         clearStorage();
     });
+    // afterEach(function () {
+    //     clearStorage();
+    // });
     describe('#Constructor', function () {
         it('Constructor should be a function', function () {
-            // assert.equal(typeof Cache, 'function')
             expect(Cache).to.be.an('function');
         });
         it('has the Cache API', function () {
@@ -27,6 +29,7 @@ describe('Cache', function () {
             expect(cache.remove).to.be.an('function');
             expect(cache.clear).to.be.an('function');
             expect(cache.update).to.be.an('function');
+            expect(cache.keys).to.be.an('function');
         });
         it('启用debug正常', function () {
             cache.debug.enable();
@@ -39,68 +42,94 @@ describe('Cache', function () {
         it('设置localStorage正常', function () {
             var local = new Cache('localStorage');
             var session = new Cache('sessionStorage');
-            local.set('test1', 'localStorage');
-            // expect(local.get('test1')).to.equal('localStorage');
-            expect(session.get('test1')).to.be.undefined;
+            local.set('local', 'localStorage');
+            expect(local.get('local')).to.equal('localStorage');
+            expect(session.get('local')).to.be.undefined;
         });
         it('设置sessionStorage正常', function () {
             var local = new Cache('localStorage');
             var session = new Cache('sessionStorage');
-            session.set('test2', 'sessionStorage');
-            // expect(session.get('test2')).to.equal('sessionStorage');
-            expect(local.get('test2')).to.be.undefined;
-        })
+            session.set('session', 'sessionStorage');
+            expect(session.get('session')).to.equal('sessionStorage');
+            expect(local.get('session')).to.be.undefined;
+        });
     });
 
     describe('#API', function () {
         cache.debug.enable();
         describe('#set, #get', function () {
             it('存储字符串正常', function () {
-                cache.set('test', 'test');
-                expect(cache.get('test')).to.not.equal('null')
+                cache.set('setStr', 'setStr');
+                expect(cache.get('setStr')).to.equal('setStr')
             });
             it('存储对象或数组正常', function () {
-                cache.set('test', { 'arr': ['test1', 'test2'] });
-                expect(cache.get('test')).to.not.deep.equal('null')
+                cache.set('setArr', { 'arr': ['arr1', 'arr2'] });
+                expect(cache.get('setArr')).to.deep.equal({ 'arr': ['arr1', 'arr2'] });
             });
             it('设置过期时间正常', function () {
-                cache.set('expire', '过期时间', { type: 's', delay: 2 });
+                cache.set('expire', '过期时间', { type: 's', delay: 1 });
                 setTimeout(function () {
                     expect(cache.get('expire')).to.be.undefined;
-                }, 3000)
-            })
+                }, 2000)
+            });
         });
         describe('#remove', function () {
             it('移除所选数据正常', function () {
                 cache.set('remove', 'test');
                 cache.remove('remove');
                 expect(cache.get('remove')).to.be.undefined;
-            })
+            });
         });
         describe('#update', function () {
             it('更新数据和过期时间正常', function () {
-                cache.set('expire', '过期时间', { type: 's', delay: 2 }); //设置过期时间为2s
+                cache.set('update', '过期时间', { type: 's', delay: 1 });
+                cache.update('update', '更新过期时间', { type: 's', delay: 2 });
                 setTimeout(function () {
-                    cache.set('expire', '更新过期时间', { type: 's', delay: 3 }); //第1s更新过期时间为当前时间之后3s
-                    setTimeout(function () {
-                        expect(cache.get('expire')).to.equal('更新过期时间'); //第3s获取存储的值
-                        setTimeout(function () {
-                            expect(cache.get('expire')).to.be.undefined //第4s再次获取，但是时间到期，值应为undefined
-                        }, 1000)
-                    }, 2000)
-                }, 1000)
-            })
+                    expect(cache.get('update')).to.be.undefined;
+                }, 3000);
+            });
         });
         describe('#clear', function () {
             it('清除所有数据正常', function () {
-                cache.set('test', 'test');
-                cache.set('haha', 'haha');
-                cache.set('hehe', 'hehe');
+                cache.set('clear1', 'clear1');
+                cache.set('clear2', 'clear2');
+                cache.set('clear3', 'clear3');
                 cache.clear();
-                expect(cache.get('test')).to.be.undefined;
-                expect(cache.get('haha')).to.be.undefined;
-                expect(cache.get('hehe')).to.be.undefined;
-            })
-        })
-    })
+                expect(cache.get('clear1')).to.be.undefined;
+                expect(cache.get('clear2')).to.be.undefined;
+                expect(cache.get('clear3')).to.be.undefined;
+            });
+
+            it('清楚过期数据正常', function (done) {
+                this.timeout(5000);
+                cache.set('clrExp1', 'clrExp1');
+                cache.set('clrExp2', 'clrExp2', { type: 's', delay: 1 });
+                expect(cache.get('clrExp2')).to.equal('clrExp2');
+                setTimeout(function () {
+                    cache.clear('exp');
+                    expect(cache.get('clrExp1')).to.equal('clrExp1');
+                    expect(cache.get('clrExp2')).to.be.undefined;
+                    done();
+                }, 2000);
+            });
+        });
+
+        describe('#keys', function () {
+            // it('获取所有存储数据的键名', function () {
+            //     cache.set('key1', 'key1');
+            //     cache.set('key2', 'key2');
+            //     expect(cache.keys()[0]).to.equal('key1');
+            // });
+
+            it('获取过期数据的键名正常', function (done) {
+                this.timeout(5000);
+                cache.set('expKey1', 'expKey1');
+                cache.set('expKey2', 'expKey2', { type: 's', delay: 1 });
+                setTimeout(function () {
+                    expect(cache.keys('exp')).to.deep.equal(['expKey2']);
+                    done();
+                }, 2000);
+            });
+        });
+    });
 });

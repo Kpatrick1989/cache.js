@@ -1,6 +1,6 @@
 {
     "name": "cache-lib",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "browser": "dist/cache.min.js",
     "main": "src/cache.js",
     "description": "cache.js 是一个轻量级的 JS 库，对 `localStorage`、`sessionStorage`进行了扩展，增加了序列化方法和过期时间。可以直接存取JSON对象、设置过期时间。",
@@ -8,17 +8,25 @@
     "license": "MIT",
     "devDependencies": {
         "chai": "^4.1.2",
+        "grunt": "^1.0.3",
+        "grunt-contrib-jshint": "~1.1.0",
+        "grunt-contrib-uglify": "~3.3.0",
+        "grunt-contrib-watch": "~1.1.0",
+        "grunt-mocha": "^1.0.4",
         "gulp": "^3.9.1",
         "gulp-jshint": "^2.1.0",
-        "gulp-mocha": "^5.0.0",
+        "gulp-mocha": "^6.0.0",
         "gulp-rename": "^1.2.3",
         "gulp-uglify": "^3.0.0",
-        "mocha": "^5.1.1",
-        "selenium-webdriver": "^4.0.0-alpha.1"
+        "mocha": "^5.2.0"
     },
     "repository": {
         "type": "git",
         "url": "git+https://kpatrick1989@github.com/Kpatrick1989/cache.js.git"
+    },
+    "scripts": {
+        "test": "grunt test",
+        "build": "grunt build"
     },
     "keywords": [
         "localstorge",

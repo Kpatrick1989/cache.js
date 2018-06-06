@@ -1,8 +1,9 @@
 # cache.js
+
 [![Build Status](https://travis-ci.org/Kpatrick1989/cache.js.svg?branch=master)](https://travis-ci.org/Kpatrick1989/cache.js)
 [![npm](https://img.shields.io/npm/dw/cache-lib.svg)](https://www.npmjs.com/package/cache-lib)
 <a href='https://gitter.im/cache-js/Lobby'>
-<img src='https://badges.gitter.im/Join%20Chat.svg' alt='Gitter Chat' />
+    <img src='https://badges.gitter.im/Join%20Chat.svg' alt='Gitter Chat' />
 </a>
 
 `cache.js` 是一个轻量级的 JS 库，对 `localStorage`、`sessionStorage`进行了扩展，增加了序列化方法和过期时间。可以直接存取JSON对象、设置过期时间。
@@ -14,9 +15,10 @@ cache.doSomething([key], [value], [expire])  // 部分 API 无需传入参数
 ```
 
 
+
 ## 开始
 
-#### # 直接引用
+### # 直接引用
 
 [下载](https://github.com/Kpatrick1989/cache.js/releases) 最新的 `cache.js` ，直接通过 script 标签在 html 页面引用：
 
@@ -24,9 +26,7 @@ cache.doSomething([key], [value], [expire])  // 部分 API 无需传入参数
 <script src="cache.js"></script>
 ```
 
-
-
-#### # npm
+### # npm
 
 在命令行工具里执行下面这个命令：
 
@@ -34,9 +34,7 @@ cache.doSomething([key], [value], [expire])  // 部分 API 无需传入参数
 $ npm install cache-lib --save-dev
 ```
 
-
-
-#### # RequireJS
+### # RequireJS
 
 在 `RequireJS` 里使用：
 
@@ -46,6 +44,7 @@ define(['cache'], function(Cache){
     /* ... */
 })
 ```
+
 
 
 ## API
@@ -66,7 +65,15 @@ var cache = new Cache('sessionStorage');
 
 
 
-#### # set
+### # __.set( key, value, [expire] )__
+
+__Params:__
+
+* key _(String)_: 需要存储的键名
+* value _(Any)_: 需要存储的值
+* [expire] _(Object)_: 设置过期时间
+
+__Examples:__
 
 ```javascript
 // 把字符串'kyle'存储到'user'里，不设置过期时间则永久有效
@@ -76,7 +83,9 @@ cache.set('user', 'kyle');
 cache.set('user', {name: 'kyle', age: 28}, {type: 's', delay: 2});
 ```
 
-设置过期时间时要传入一个对象，指定类型 type<string>和延迟时间 delay<number>，类型参考如下：
+__Notes:__
+
+1. 设置过期时间时要传入一个对象，指定类型 type\<string\>和延迟时间 delay\<number\>，类型参考如下：
 
 | Type | Description | Example                                           |
 | :--- | :---------- | ------------------------------------------------- |
@@ -88,15 +97,19 @@ cache.set('user', {name: 'kyle', age: 28}, {type: 's', delay: 2});
 | m    | 分钟        | {type: 'm', delay: 1}  // 设置过期时间为1分钟后   |
 | s    | 秒          | {type: 's', delay: 1}  // 设置过期时间为1秒钟后   |
 
-当传入的类型不在上表范围内时，则默认 type 为 'd'。
-
-如果 set 的时候 key 已经存在，并且设置了过期时间，当再次设置过期时间时则覆盖原值，此次 set 时没有设置过期时间则保持此前设置的时间不变。
-
-如果 set 的时候 key 已经存在并且设置的时间已经过期，不会清除该条数据而是覆盖新值。
+2. 当传入的类型不在上表范围内时，则默认 type 为 'd'；
+3. 如果 set 的时候 key 已经存在，并且设置了过期时间，当再次设置过期时间时则覆盖原值，此次 set 时没有设置过期时间则保持此前设置的时间不变；
+4. 如果 set 的时候 key 已经存在，并且设置的时间已经过期，不会清除该条数据而是覆盖新值；
 
 
 
-#### # get
+### # __.get( key )__
+
+__Params:__
+
+* key _(String)_: 需要获取的键名
+
+__Examples:__
 
 ```javascript
 // 获取'user'下存储的值
@@ -107,24 +120,22 @@ cache.get('user').name;
 cache.get('user').age;
 ```
 
-如果 get 的这个 key 设置的时间已经过期则返回之前存储的数据，并清除该条数据。
+__Notes:__
 
-如果 get 的这个 key 不存在则返回 undefined。
-
-
-
-#### # remove
-
-```javascript
-// 移除'user'
-cache.remove('user');
-```
-
-如果 remove 的这个 key 不存在则返回 undefined。
+1. 如果 get 的这个 key 设置的时间已经过期则返回之前存储的数据，并清除该条数据；
+2. 如果 get 的这个 key 不存在则返回 undefined；
 
 
 
-#### # update
+### # __.update( key, [value], expire )__
+
+__Params:__
+
+- key _(String)_: 需要更新的键名
+- [value] _(Any)_: 需要存储的值
+- expire _(Object)_: 设置过期时间
+
+__Examples:__
 
 ```javascript
 // 更新过期时间为当前时间之后5s
@@ -134,28 +145,85 @@ cache.update('user', {type: 's', delay: 5});
 cache.update('user', {name: 'kyle', age: 28}, {type: 's', delay: 2});
 ```
 
-如果 update 的这个 key 不存在则返回 undefined。
+__Notes:__
 
-更新过期时间的方法同设置的方法，请参考上方 set 的例子。
+1. 如果 update 的这个 key 不存在则返回 undefined；
+2. 只更新过期时间则传入2个参数，第2个参数为过期时间，过期时间设置方法同set，请参考set 的例子；
+3. 当同时更新存储的数据和过期时间则传入3个参数，第2个参数为更新的数据，第3个参数为过期时间；（与set传入3个参数时效果相同）
+4. 只需更新存储的数据时请使用set方法；
 
-当同时更新存储的数据和过期时间时 update 的效果同 set 设置过期时间的方法。
+
+
+### # __.remove( key )__
+
+__Params:__
+
+- key _(String)_: 需要移除的键名
+
+__Examples:__
+
+```javascript
+// 移除'user'
+cache.remove('user');
+```
+
+__Notes:__
+
+1. 如果 remove 的这个 key 不存在则返回 undefined；
 
 
 
-#### # clear
+### # .clear( ['exp'] )
+
+__Params:__
+
+* ['exp'] _(String)_: 传入字符串'exp'来选择过期数据
+
+__Examples:__
 
 ```javascript
 // 清除所有数据
 cache.clear();
+
+// 清除过期的数据
+cache.clear('exp');
 ```
 
+__Notes:__
+
+1. 此方法会移除所有包括不是通过cache.js存入的数据；
+2. 必须传入'exp'才能清除过期的数据，若不是则清除所有数据；
 
 
-#### # debug
+
+### # .keys( ['exp'] )
+
+__Params:__
+
+- ['exp'] _(String)_: 传入字符串'exp'来选择过期数据
+
+__Examples:__
+
+```javascript
+// 获取所有数据的键名
+cache.keys(); 
+
+// 获取过期的数据的键名
+cache.keys('exp');
+```
+
+__Notes:__
+
+1. 此方法会返回所有包括不是通过cache.js存入的数据的键名；
+2. 必须传入'exp'才能返回过期的数据的键名，若不是则返回所有数据的键名；
+
+
+
+### # .debug
 
 cache 提供了详细的 console 输出，默认禁用。
 
-启用如下设置即可：
+__启用如下设置即可：__
 
 ```javascript
 cache.debug.enable();
@@ -165,9 +233,8 @@ cache.debug.enable();
 
 ![console.log](http://pengxy-source.b0.upaiyun.com/consolelog.png)
 
-禁用如下设置即可：
+__禁用如下设置即可：__
 
 ```javascript
 cache.debug.disabled();
 ```
-
