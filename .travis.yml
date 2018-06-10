@@ -1,4 +1,4 @@
-sudo: required
-before_install:
-- npm install -g
 language: node_js
+sudo: true
+before_install:
+- npm install
