@@ -1,4 +1,3 @@
 language: node_js
-sudo: true
-before_install:
-- npm install
+node_js:
+  - "node"
