@@ -1,6 +1,6 @@
 {
     "name": "cache-lib",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "browser": "dist/cache.min.js",
     "main": "src/cache.js",
     "description": "cache.js 是一个轻量级的 JS 库，对 `localStorage`、`sessionStorage`进行了扩展，增加了序列化方法和过期时间。可以直接存取JSON对象、设置过期时间。",

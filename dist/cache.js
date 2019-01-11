@@ -1,6 +1,6 @@
 /*!
- * Cache.js v0.0.4
- * (c) 2018-06-03 Xinyu Peng
+ * Cache.js v0.0.5
+ * (c) 2019-01-11 Xinyu Peng
  */
 
 ; (function (global, factory) {

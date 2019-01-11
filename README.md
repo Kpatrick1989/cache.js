@@ -45,6 +45,17 @@ define(['cache'], function(Cache){
 })
 ```
 
+### # CDN
+
+我们推荐链接到一个你可以手动更新的指定版本号：
+
+```javascript
+<script src="https://unpkg.com/cache-lib@0.0.5/dist/cache.js"></script>
+```
+使用压缩版本，这是一个更小的构建，可以带来比开发环境下更快的速度体验。
+```javascript
+<script src="https://unpkg.com/cache-lib@0.0.5/dist/cache.min.js"></script>
+```
 
 
 ## API
