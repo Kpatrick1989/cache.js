@@ -242,7 +242,7 @@ cache.debug.enable();
 
 在浏览器的控制台里可以看到如下输出：
 
-![console.log](http://pengxy-source.b0.upaiyun.com/consolelog.png)
+![console.log](https://github.com/Kpatrick1989/cache.js/blob/7352d46ca76d2ce3cdab00b9066b24908eb3855f/consolelog.png)
 
 __禁用如下设置即可：__
 
